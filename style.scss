@@ -1,0 +1,102 @@
+$black: #000;
+$white: #fff;
+$violet: #673ab7;
+$green: #4caf50;
+$red: #e91e63;
+$grey: #1d1f20;
+$font-size-body: 16px;
+$font-size-b: 1.125em;
+$font-size-sm: 0.75em;
+$i: -item;
+$b: block;
+
+@mixin main_body($ln-hght){
+    color: $black;
+    font-size: $font-size-body;
+    line-height: $ln-hght;
+}
+body{
+    @include main_body(1)
+}
+
+@mixin container($wd) {
+    width: $wd;
+    margin: 0 auto;
+}
+
+.container{
+    @include container(1200px)
+}
+@mixin navbar($pad) {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: $pad;
+  background-color: $green;
+}
+@mixin color-backgr($color, $backgr) {
+    color: $color;
+    background-color: $backgr;
+}
+.navbar {
+    @include navbar(0 15px);
+
+    ul{
+        padding: 0;
+        margin: 0;
+        list-style: none;
+        & > li{
+            margin-right: 10px;
+            font-size: $font-size-b;
+            font-weight: 600;
+
+            & > a{
+                display: $b;
+                color: $violet;
+                font-size: $font-size-sm;
+            }
+            .active{
+                @include color-backgr($white, $red);
+
+            }
+            :hover{
+                @extend .active;
+            }
+            .active > , :hover > {
+                  a{
+                    color: inherit;
+                }
+            }
+        }
+}
+}
+
+.gallery{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.gallery#{$i} {
+    width: 25%;
+    text-align: center;
+    img {
+        display: $b;
+        max-width: 100%;
+        border-radius: 50%;
+    }
+}
+.contacts{
+    @include color-backgr($white, $grey);
+    a{
+        display: inline-block;
+        padding: 5px;
+        color: inherit;
+        text-decoration: none;
+
+        :hover{
+            text-decoration: underline;
+        }
+    }
+}
+
